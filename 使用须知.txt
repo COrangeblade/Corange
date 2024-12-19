@@ -1,7 +1,7 @@
 更新中...
 
 这些数据结构都是基于STL的 std::vector 开发的，默认都为 int 型
-庆祝C++14环境下编译
+请在C++14环境下编译
 定义方法(如栈)：  _stack sta;
 若定义 树/链表：_tree tr; tr.create();  _list l; l.create();
 图若使用拓扑排序，请保证其为DAG，并调用 .create(/* 节点数量 */)
