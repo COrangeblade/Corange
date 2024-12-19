@@ -1,0 +1,83 @@
+更新中...
+
+这些数据结构都是基于STL的 std::vector 开发的，默认都为 int 型
+庆祝C++14环境下编译
+定义方法(如栈)：  _stack sta;
+若定义 树/链表：_tree tr; tr.create();  _list l; l.create();
+图若使用拓扑排序，请保证其为DAG，并调用 .create(/* 节点数量 */)
+
+栈 :  _stack.h
+	.clear()  void  O(1)   清空所有元素
+	.pop()  void  O(1)    删除栈顶元素(若空无操作)
+	.top()  int   O(1)    返回栈顶元素(若空无操作)
+	.push(int v)  void   O(1)    向栈中压入一个元素
+	.size()  int   O(1)    返回栈中元素数量
+	.empty()  bool    O(1)   判断栈是否为空，是返回true,否则返回false
+	.begin()  auto   O(1)   返回一个迭代器，指向栈底
+	.end()  auto   O(1)    返回一个迭代器，指向栈顶下一位
+
+
+队列：_queue.h
+	.clear()  void  O(1)   清空所有元素
+	.pop()  void  O(n)   删除队首元素(若空无操作)
+	.push(int v)  void  O(1)    向队尾插入一个元素
+	.front()  int   O(1)    返回队首元素
+	.back()  int   O(1)    返回队尾元素
+	.size()  int   O(1)    返回队中元素数量
+	.empty()  bool   O(1)    判断队是否为空，是返回true,否则返回false
+	.begin()  auto   O(1)     返回一个迭代器，指向队首
+	.end()  auto   O(1)    返回一个迭代器，指向队尾下一位
+
+
+双端队列：_deque.h
+	.clear()  void  O(1)   清空所有元素
+	.push_back(int v)  void  O(1)   向队尾插入一个元素
+	.push_front(int v)  void  O(n)   向队首插入一个元素
+	.pop_back()  void   O(1)    删除队尾元素(若空无操作)
+	.pop_front()  void   O(n)    删除队首元素(若空无操作)
+	.back()  int   O(1)   返回队尾元素(若空无操作)
+	.front()  int   O(1)   返回队尾元素(若空无操作)
+	.size()  int   O(1)     返回队中元素数量
+	.empty()  bool   O(1)    判断队是否为空，是返回true,否则返回false
+	.begin()  auto   O(1)     返回一个迭代器，指向队首
+	.end()  auto   O(1)    返回一个迭代器，指向队尾下一位
+
+
+双向链表： _list.h
+	.clear()  void  O(1)   清空所有元素
+	.create()  void   O(1)   创建一个新链表   ( 定义一个新链表时一定要先调用create()再做其他操作!!! )
+	.insert(int id,int n)   void  O(1)   向节点id前插入一个编号为n的节点
+	.push_front(int id)   void  O(1)   在链表开头插入一个编号为id的节点
+	.push_back(int id)   void   O(1)  在链表末尾插入一个编号为id的节点
+	.erase(int id)  void    O(n)   删除编号为id的节点
+	.pop_front()   void   O(1)    删除链表中第一个元素
+	.pop_back()  void   O(1)     删除链表中最后一个元素
+	.front()   int  O(1)    返回链表中第一个元素
+	.back()    int  O(1)   返回链表中最后一个元素
+	.size()  int    O(1)    返回链表元素个数
+	.empty()  bool    O(1)   返回链表是否为空
+	.begin()  auto  O(1)   返回一个迭代器，指向链表首
+	.end()  auto   O(1)   返回一个迭代器，指向链表末后一位
+
+
+树(0为根节点)：_tree.h  
+	.clear()  void  O(1)   清空所有元素
+	.create()  void  O(1)  创建一棵新树   ( 定义一棵新树时一定要先调用create()再做其他操作!!! )
+	.destroy()  void   O(1)   摧毁一棵树   ( =  .clear()  )
+	.depth(int id=0)  int   O(n^2)   以id为根，返回以id为根的(子)树的深度(id默认为0)
+	.add(int n,int id=0)  void   O(1)   向节点编号为id的节点添加一个编号为n的子节点(id默认为0)
+		注：请勿做如下操作 -> add(0,3);add(3,4); vector会越界.
+	.dfs_print(int id=0)  void   O(n^2)   输出以id为根的(子)树的先序遍历(id默认为0)
+	.bfs_print(int id=0)  void   O(n)   输出以id为根的(子)树的层序遍历(id默认为0)
+	.cut(int id)  void  O(nlogn)   从树上剪下节点编号为id的子树
+	.graft(_tree &t,int id=0)  void   O(n^2)   给节点编号为id的节点上嫁接另一棵树(id默认为0)
+
+
+有权有向图(邻接表)： _picture.h
+	.clear()  void  O(1)   清空所有元素
+	.create(int n)  void  O(1)  将0到n-1的节点d入度设为0
+	.add(int u,int v,int w=1)  void   O(1)   增加一条从u到v，边权为w(w默认为1)的边
+	.del(int u,int v)  void  O(n)  删除从u到v的所有边
+	.change(int u,int old_v,int new_v)   void   O(n)  把所有从u到old_v的边全部改为从u到new_v的边
+	.find(int u,int v)  bool   O(n)  寻找第1条从u到v的边，若有返回true，若无返回false
+	.Tsort()  vector<int>  O(E+V)  返回一种拓扑排序后的顺序
